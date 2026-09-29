@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Stackly Nonprofit - Get in touch with us for support, feedback, or media inquiries.">
+    <title>Contact - Stackly Nonprofit</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================================
+           CSS VARIABLES
+           ================================================================ */
+        :root {
+            --primary-green: #0D4E3B;
+            --accent-yellow: #FDE16D;
+            --text-dark: #1A1A1A;
+            --text-gray: #666666;
+            --bg-light: #F9F9F9;
+            --white: #FFFFFF;
+            --border-color: #EAEAEA;
+
+            --clr-green-dark: #155c3a;
+            --clr-green-deep: #0e4a2d;
+            --clr-green-mid: #1a6b43;
+            --clr-yellow: #e8b730;
+            --clr-white: #ffffff;
+            --clr-black: #111111;
+            --clr-text: #333333;
+            --clr-gray-light: #f2f2f2;
+
+            --ff-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --ff-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+            --container-max: 1200px;
+            --container-padding: 0 24px;
+            --header-height: 88px;
+            --transition: 0.3s ease;
+        }
+
+        /* ================================================================
+           RESET
+           ================================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-top: var(--header-height);
+        }
+
+        body.nav-open {
+            overflow: hidden;
+        }
+
+        body.popup-open {
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        button,
+        input,
+        textarea {
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: var(--container-padding);
+        }
+
+        /* ================================================================
+           BUTTONS (shared – used by header)
+           ================================================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--ff-body);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            white-space: nowrap;
+        }
+
+        .btn--signup {
+            background-color: var(--clr-green-dark);
+            color: var(--clr-white);
+            padding: 11px 28px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .btn--signup:hover {
+            background-color: var(--clr-green-deep);
+            transform: translateY(-1px);
+        }
+
+        /* ================================================================
+           HEADER / NAVIGATION
+           ================================================================ */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--clr-white);
+            transition: var(--transition);
+            font-family: var(--ff-body);
+        }
+
+        .header.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .header__container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 22px;
+            padding-bottom: 22px;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            font-family: var(--ff-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--clr-black);
+            line-height: 1;
+        }
+
+        .header__logo-icon {
+            flex-shrink: 0;
+            width: 38px;
+            height: 42px;
+            object-fit: contain;
+            margin-right: -4px;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__nav-list {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .header__nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--clr-text);
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .header__nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--clr-yellow);
+            transition: var(--transition);
+        }
+
+        .header__nav-link:hover::after,
+        .header__nav-link.active::after {
+            width: 100%;
+        }
+
+        .header__nav-link:hover {
+            color: var(--clr-green-dark);
+        }
+
+        .header__hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        .header__hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background-color: var(--clr-black);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .header__hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .header__hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .header__hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ================================================================
+           HERO SECTION (CONTACT)
+           ================================================================ */
+        .hero {
+            background-color: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 100px 5%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .hero-leaf-left,
+        .hero-leaf-right {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 250px;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .hero-leaf-left { left: 5%; }
+        .hero-leaf-right { right: 5%; transform: translateY(-50%) scaleX(-1); }
+
+        /* ================================================================
+           CONTACT INFO & FORM SECTION
+           ================================================================ */
+        .contact-section {
+            padding: 80px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .contact-desc {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: var(--text-dark);
+        }
+
+        .contact-item svg {
+            color: var(--primary-green);
+            flex-shrink: 0;
+        }
+
+        .contact-sub-sections {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .sub-section h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .sub-section p {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .contact-form-wrapper {
+            background-color: var(--primary-green);
+            padding: 50px;
+            border-radius: 8px;
+            color: var(--white);
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .contact-form-wrapper p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 6px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 14px;
+            outline: none;
+            transition: background 0.3s;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-send {
+            background-color: var(--accent-yellow);
+            color: var(--text-dark);
+            padding: 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-send:hover {
+            background-color: #e5c857;
+        }
+
+        /* ----------------------------------------------------------------
+           CONTACT FORM — field wrappers, inline errors & validation states
+           ---------------------------------------------------------------- */
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-error {
+            display: none;
+            font-size: 12.5px;
+            line-height: 1.45;
+            color: #FFC9C9;
+            padding-left: 6px;
+        }
+
+        .field-error.show {
+            display: block;
+        }
+
+        .contact-form input.input-error,
+        .contact-form textarea.input-error {
+            box-shadow: inset 0 0 0 2px #FF8A8A;
+            background-color: rgba(255, 255, 255, 0.16);
+        }
+
+        .contact-form input.shake,
+        .contact-form textarea.shake {
+            animation: shakeInput 0.4s ease;
+        }
+
+        .btn-send:disabled {
+            opacity: 0.75;
+            cursor: not-allowed;
+        }
+
+        /* ================================================================
+           MAP & LOCATION SECTION
+           ================================================================ */
+        .map-location-section {
+            padding: 0 5% 100px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .map-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .map-image {
+            display: block;
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 400px;
+            background-color: #eee;
+            cursor: pointer;
+        }
+
+        .map-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .map-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .map-image::after {
+            content: 'Click to open in Google Maps';
+            position: absolute;
+            left: 50%;
+            bottom: 16px;
+            transform: translateX(-50%);
+            background-color: rgba(13, 78, 59, 0.88);
+            color: #fff;
+            font-size: 12.5px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .map-image:hover::after,
+        .map-image:focus-visible::after {
+            opacity: 1;
+        }
+
+        .location-info .location-subtitle {
+            color: var(--primary-green);
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .location-info h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 25px;
+        }
+
+        .location-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .location-info p {
+            color: var(--text-gray);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* ================================================================
+           FOOTER  (homepage version)
+           ================================================================ */
+        .footer {
+            background-color: #132A1E;
+            color: var(--clr-white);
+            padding: 80px 0 0;
+            font-family: var(--ff-body);
+        }
+
+        .footer__grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1.2fr 1.5fr 2fr;
+            gap: 30px;
+            padding-bottom: 50px;
+        }
+
+        .footer__col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer__logo {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            font-family: var(--ff-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--clr-white);
+            margin-bottom: 24px;
+            line-height: 1;
+            width: fit-content;
+            max-width: max-content;
+        }
+
+        .footer__logo-icon {
+            flex-shrink: 0;
+            width: 38px;
+            height: 42px;
+            object-fit: contain;
+            margin-right: -4px;
+        }
+
+        .footer__brand-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .footer__title {
+            font-family: var(--ff-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--clr-white);
+            margin-bottom: 24px;
+        }
+
+        .footer__links {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .footer__links a {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            transition: var(--transition);
+        }
+
+        .footer__links a:hover {
+            color: var(--clr-white);
+            padding-left: 4px;
+        }
+
+        .footer__contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.65);
+            margin-bottom: 14px;
+        }
+
+        .footer__contact-item svg {
+            flex-shrink: 0;
+            color: #2ecc71;
+        }
+
+        .footer__newsletter-form {
+            display: flex;
+            background-color: var(--clr-white);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .footer__newsletter-input {
+            flex: 1;
+            padding: 14px 16px;
+            border: none;
+            outline: none;
+            font-family: var(--ff-body);
+            font-size: 0.9rem;
+            color: var(--clr-text);
+            min-width: 0;
+        }
+
+        .footer__newsletter-input::placeholder {
+            color: #888;
+        }
+
+        .footer__newsletter-btn {
+            background-color: #1ABC9C;
+            color: var(--clr-white);
+            border: none;
+            padding: 0 28px;
+            font-family: var(--ff-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .footer__newsletter-btn:hover {
+            background-color: #16a085;
+        }
+
+        .footer__newsletter-note {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 24px;
+        }
+
+        .footer__social-title {
+            font-family: var(--ff-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--clr-white);
+            margin-bottom: 16px;
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer__social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: var(--clr-white);
+            color: #132A1E;
+            transition: var(--transition);
+        }
+
+        .footer__social-icon:hover {
+            transform: translateY(-3px);
+            background-color: #1ABC9C;
+            color: var(--clr-white);
+        }
+
+        .footer__bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .footer__bottom p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        /* ================================================================
+           NEWSLETTER POPUP  (homepage version)
+           ================================================================ */
+        .popup {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup__overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.55);
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+        }
+
+        .popup__box {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--clr-white);
+            border-radius: 16px;
+            padding: 36px 30px 30px;
+            text-align: center;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+            transform: translateY(24px) scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .popup.active .popup__box {
+            transform: translateY(0) scale(1);
+        }
+
+        .popup__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+        }
+
+        .popup__icon--success {
+            background-color: #e3f5ec;
+            color: var(--clr-green-dark);
+        }
+
+        .popup__icon--error {
+            background-color: #fdeaea;
+            color: #c0392b;
+        }
+
+        .popup__title {
+            font-family: var(--ff-body);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--clr-black);
+            margin-bottom: 10px;
+        }
+
+        .popup__msg {
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: var(--clr-text-light, #555);
+            margin-bottom: 26px;
+            word-break: break-word;
+            white-space: pre-line;   /* allows multi-line error lists */
+        }
+
+        .popup__btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 13px 24px;
+            border: none;
+            border-radius: 50px;
+            background-color: var(--clr-green-dark);
+            color: var(--clr-white);
+            font-family: var(--ff-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .popup__btn:hover {
+            background-color: var(--clr-green-deep);
+            transform: translateY(-1px);
+        }
+
+        .popup__close {
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            color: #999;
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .popup__close:hover {
+            background-color: var(--clr-gray-light);
+            color: var(--clr-black);
+        }
+
+        .footer__newsletter-input.input-error {
+            box-shadow: inset 0 0 0 2px #e74c3c;
+        }
+
+        @keyframes shakeInput {
+            0%, 100% { transform: translateX(0); }
+            20%      { transform: translateX(-5px); }
+            40%      { transform: translateX(5px); }
+            60%      { transform: translateX(-3px); }
+            80%      { transform: translateX(3px); }
+        }
+
+        .footer__newsletter-input.shake {
+            animation: shakeInput 0.4s ease;
+        }
+
+        @media (max-width: 480px) {
+            .popup__box { padding: 30px 22px 24px; }
+            .popup__icon { width: 58px; height: 58px; }
+            .popup__title { font-size: 1.1rem; }
+        }
+
+        /* ================================================================
+           RESPONSIVE – TABLET (max-width: 1024px)
+           ================================================================ */
+        @media (max-width: 1024px) {
+            .hero-content h1 { font-size: 3rem; }
+            .hero-leaf-left, .hero-leaf-right { width: 150px; }
+
+            .contact-grid { gap: 40px; }
+            .contact-sub-sections { grid-template-columns: 1fr 1fr; }
+            .contact-form-wrapper { padding: 40px; }
+
+            .map-grid { gap: 40px; }
+            .location-info h2 { font-size: 1.8rem; }
+
+            .footer__grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 40px;
+            }
+        }
+
+        /* ================================================================
+           RESPONSIVE – MOBILE (max-width: 768px)
+           ================================================================ */
+        @media (max-width: 768px) {
+            :root {
+                --header-height: 74px;
+            }
+
+            .header__nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background-color: var(--clr-green-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .header__nav.open { right: 0; }
+
+            .header__nav-list {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .header__nav-link {
+                font-size: 1.1rem;
+                color: var(--clr-white);
+            }
+
+            .btn--signup { display: none; }
+            .header__hamburger { display: flex; }
+
+            .hero { padding: 80px 20px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-leaf-left, .hero-leaf-right { display: none; }
+
+            .contact-section { padding: 50px 20px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-info h2 { font-size: 2rem; }
+            .contact-desc { max-width: 100%; }
+            .contact-sub-sections { grid-template-columns: 1fr; }
+
+            .contact-form-wrapper { padding: 30px; }
+            .contact-form-wrapper h3 { font-size: 1.5rem; }
+
+            .map-location-section { padding: 0 20px 50px; }
+            .map-grid { grid-template-columns: 1fr; }
+            .map-image { height: 300px; }
+            .location-info h2 { font-size: 1.6rem; }
+
+            .footer__grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .footer__col { align-items: center; }
+            .footer__logo { justify-content: center; }
+            .footer__contact-item { justify-content: center; }
+
+            .footer__newsletter-form {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .footer__socials { justify-content: center; }
+        }
+
+        /* ================================================================
+           RESPONSIVE – SMALL MOBILE (max-width: 480px)
+           ================================================================ */
+        @media (max-width: 480px) {
+            .hero-content h1 { font-size: 2rem; }
+            .contact-info h2 { font-size: 1.8rem; }
+            .contact-form-wrapper { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================
+         HEADER / NAVIGATION
+         ================================================================ -->
+    <header class="header" id="header">
+        <div class="container header__container">
+            <a href="index.html" class="header__logo" id="logo">
+                <img src="./images/header_logo.webp" alt="Stackly Logo" class="header__logo-icon" width="38" height="42">
+                <span>Stackly</span>
+            </a>
+            <nav class="header__nav" id="mainNav">
+                <ul class="header__nav-list">
+                    <li><a href="index.html" class="header__nav-link">Home</a></li>
+                    <li><a href="about.html" class="header__nav-link">About Us</a></li>
+                    <li><a href="donation.html" class="header__nav-link">Donation</a></li>
+                    <li><a href="volunteer.html" class="header__nav-link">V. Form</a></li>
+                    <li><a href="blog.html" class="header__nav-link">Blog</a></li>
+                    <li><a href="contact.html" class="header__nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+            <a href="signup.html" class="btn btn--signup" id="signupBtn">Sign Up</a>
+            <button class="header__hamburger" id="hamburgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile nav overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- ================================================================
+         HERO SECTION
+         ================================================================ -->
+    <section class="hero">
+        <img src="./images/left_leaf.webp" alt="Decorative Leaf" class="hero-leaf-left">
+        <img src="./images/rigt_leaf.webp" alt="Decorative Leaf" class="hero-leaf-right">
+
+        <div class="hero-content">
+            <h1>Contact</h1>
+            <p>Home / Contact</p>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         CONTACT INFO & FORM SECTION
+         ================================================================ -->
+    <section class="contact-section">
+        <div class="contact-grid">
+            <!-- Left Side: Info -->
+            <div class="contact-info">
+                <h2>Contact Us</h2>
+                <p class="contact-desc">We're here to help! Reach out with any questions or support needs, and our team will get back to you promptly. Let's connect!</p>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span>Stackly@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        <span>+8801846447109</span>
+                    </div>
+                </div>
+
+                <div class="contact-sub-sections">
+                    <div class="sub-section">
+                        <h3>Customer support</h3>
+                        <p>Our support team is available 24/7 to assist with any questions or concerns you may have.</p>
+                    </div>
+                    <div class="sub-section">
+                        <h3>Feedback and Suggestions</h3>
+                        <p>We value your feedback and are continuously working to improve Raha. Your input is essential in shaping its future.</p>
+                    </div>
+                    <div class="sub-section">
+                        <h3>Media Inquiries</h3>
+                        <p>For media inquiries or press-related questions, please contact us at Stackly@gmail.com.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Form -->
+            <div class="contact-form-wrapper">
+                <h3>Get In Touch</h3>
+                <p>You can reach us any time</p>
+
+                <!-- novalidate = our own custom validation (see script below) -->
+                <form class="contact-form" id="contactForm" novalidate>
+
+                    <div class="form-field">
+                        <input type="text"
+                               id="contactName"
+                               name="name"
+                               placeholder="Full Name"
+                               autocomplete="name"
+                               aria-label="Full Name"
+                               aria-describedby="contactNameError">
+                        <small class="field-error" id="contactNameError" role="alert"></small>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="email"
+                               id="contactEmail"
+                               name="email"
+                               placeholder="Enter your Email Address"
+                               autocomplete="email"
+                               aria-label="Email Address"
+                               aria-describedby="contactEmailError">
+                        <small class="field-error" id="contactEmailError" role="alert"></small>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="tel"
+                               id="contactPhone"
+                               name="phone"
+                               placeholder="Enter your Phone Number"
+                               inputmode="numeric"
+                               maxlength="10"
+                               autocomplete="tel"
+                               aria-label="Phone Number"
+                               aria-describedby="contactPhoneError">
+                        <small class="field-error" id="contactPhoneError" role="alert"></small>
+                    </div>
+
+                    <div class="form-field">
+                        <textarea id="contactMessage"
+                                  name="message"
+                                  placeholder="Type your message here"
+                                  aria-label="Message"
+                                  aria-describedby="contactMessageError"></textarea>
+                        <small class="field-error" id="contactMessageError" role="alert"></small>
+                    </div>
+
+                    <button type="submit" class="btn-send" id="contactSendBtn">Send</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         MAP & LOCATION SECTION
+         ================================================================ -->
+    <section class="map-location-section">
+        <div class="map-grid">
+
+            <!-- Clicking the map opens Google Maps in a new tab -->
+            <a class="map-image"
+               href="https://maps.app.goo.gl/rZc7Fi7D6JRNnvp8A?g_st=ic"
+               target="_blank"
+               rel="noopener noreferrer"
+               title="Open our location in Google Maps"
+               aria-label="Open our location in Google Maps (opens in a new tab)">
+                <img src="./images/map.webp" alt="Map Location">
+            </a>
+
+            <div class="location-info">
+                <span class="location-subtitle">OUR LOCATION</span>
+                <h2>Find Us at Our Convenient Location</h2>
+                <h3>Headquarter</h3>
+                <p>MMR Complex, Salem,<br>Tamil Nadu 636008</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         FOOTER  (homepage version)
+         ================================================================ -->
+    <footer class="footer">
+        <div class="container footer__grid">
+            <div class="footer__col footer__col--brand">
+                <a href="index.html" class="footer__logo">
+                    <img src="./images/logo.webp" alt="Stackly Logo" class="footer__logo-icon" width="38" height="42">
+                    <span>Stackly</span>
+                </a>
+                <p class="footer__brand-text">
+                    10k<br>
+                    Worldwide Client<br>
+                    Already Connected
+                </p>
+            </div>
+
+            <div class="footer__col">
+                <h4 class="footer__title">Quick Link</h4>
+                <ul class="footer__links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="blog.html">Blog Post</a></li>
+                    <li><a href="donation.html">Donation</a></li>
+                    <li><a href="volunteer.html">V.Form</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <h4 class="footer__title">Get In Touch</h4>
+                <ul class="footer__links">
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Customer</a></li>
+                    <li><a href="#">Client Services</a></li>
+                </ul>
+            </div>
+
+            <!-- ===== ADDRESS COLUMN ===== -->
+            <div class="footer__col">
+                <h4 class="footer__title">Address</h4>
+                <div class="footer__contact">
+
+                    <!-- Location → opens Google Maps -->
+                    <a href="https://maps.app.goo.gl/RPcirkD5cH1evV527"
+                       class="footer__contact-item"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       aria-label="Open our location in Google Maps (opens in a new tab)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        <span>MMR Complex, Salem,<br>Tamil Nadu 636008</span>
+                    </a>
+
+                    <!-- Phone → opens the dialer app -->
+                    <a href="tel:+918521499999"
+                       class="footer__contact-item"
+                       aria-label="Call us at +91 85214 99999">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <span>+91 85214 99999</span>
+                    </a>
+
+                    <!-- Email → opens the mail app -->
+                    <a href="mailto:Stackly@Gmail.Com?subject=Enquiry%20from%20Stackly%20Website"
+                       class="footer__contact-item"
+                       aria-label="Email us at Stackly@Gmail.Com">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                            <polyline points="22,6 12,13 2,6"/>
+                        </svg>
+                        <span>Stackly@Gmail.Com</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer__col footer__col--newsletter">
+                <h4 class="footer__title">Newsletter</h4>
+
+                <!-- NEWSLETTER FORM — id + novalidate for custom validation -->
+                <form class="footer__newsletter-form" id="newsletterForm" novalidate>
+                    <input type="email"
+                           id="newsletterEmail"
+                           placeholder="Enter Your Email"
+                           class="footer__newsletter-input"
+                           autocomplete="email"
+                           aria-label="Email address">
+                    <button type="submit" class="footer__newsletter-btn" id="newsletterSubmit">Subscribe</button>
+                </form>
+                <p class="footer__newsletter-note">Your email is safe with us, we don't spam.</p>
+
+                <h4 class="footer__social-title">Follow Me</h4>
+                <div class="footer__socials">
+                    <a href="404.html" class="footer__social-icon" aria-label="Twitter">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="404.html" class="footer__social-icon" aria-label="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="404.html" class="footer__social-icon" aria-label="Pinterest">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.966 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                    </a>
+                    <a href="404.html" class="footer__social-icon" aria-label="YouTube">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer__bottom">
+            <div class="container">
+                <p>Designed By Themefisher Developed By Gethugothemes</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================
+         POPUP (shared: newsletter + contact form)
+         ================================================================ -->
+    <div class="popup" id="newsletterPopup" role="dialog" aria-modal="true"
+         aria-labelledby="popupTitle" aria-describedby="popupMsg" aria-hidden="true">
+        <div class="popup__overlay" data-popup-close></div>
+
+        <div class="popup__box">
+            <button type="button" class="popup__close" data-popup-close aria-label="Close popup">&times;</button>
+
+            <div class="popup__icon" id="popupIcon"></div>
+            <h3 class="popup__title" id="popupTitle"></h3>
+            <p class="popup__msg" id="popupMsg"></p>
+            <button type="button" class="popup__btn" data-popup-close>OK</button>
+        </div>
+    </div>
+
+    <!-- ================================================================
+         JAVASCRIPT
+         ================================================================ -->
+    <script>
+    (function () {
+        'use strict';
+
+        /* ------------------------------------------------------------
+           1. HEADER — shadow on scroll
+        ------------------------------------------------------------ */
+        var header = document.getElementById('header');
+
+        function handleHeaderScroll() {
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+        handleHeaderScroll();
+
+
+        /* ------------------------------------------------------------
+           2. MOBILE NAVIGATION — hamburger + overlay
+        ------------------------------------------------------------ */
+        var hamburgerBtn = document.getElementById('hamburgerBtn');
+        var mainNav      = document.getElementById('mainNav');
+        var navOverlay   = document.getElementById('navOverlay');
+
+        function openNav() {
+            mainNav.classList.add('open');
+            hamburgerBtn.classList.add('active');
+            navOverlay.classList.add('active');
+            document.body.classList.add('nav-open');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+        }
+
+        function closeNav() {
+            mainNav.classList.remove('open');
+            hamburgerBtn.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleNav() {
+            if (mainNav.classList.contains('open')) {
+                closeNav();
+            } else {
+                openNav();
+            }
+        }
+
+        hamburgerBtn.addEventListener('click', toggleNav);
+        navOverlay.addEventListener('click', closeNav);
+
+        mainNav.querySelectorAll('.header__nav-link').forEach(function (link) {
+            link.addEventListener('click', closeNav);
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && mainNav.classList.contains('open')) {
+                closeNav();
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                closeNav();
+            }
+        });
+
+
+        /* ------------------------------------------------------------
+           3. IMAGE FALLBACKS
+        ------------------------------------------------------------ */
+        document.querySelectorAll('img').forEach(function (img) {
+            img.addEventListener('error', function () {
+                this.style.opacity = '0';
+            });
+        });
+
+
+        /* ------------------------------------------------------------
+           4. SHARED POPUP  (used by newsletter + contact form)
+        ------------------------------------------------------------ */
+        var popup      = document.getElementById('newsletterPopup');
+        var popupIcon  = document.getElementById('popupIcon');
+        var popupTitle = document.getElementById('popupTitle');
+        var popupMsg   = document.getElementById('popupMsg');
+
+        var GMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+        var ICON_SUCCESS =
+            '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+            '<path d="M20 6L9 17l-5-5"/></svg>';
+
+        var ICON_ERROR =
+            '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+            'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' +
+            '<circle cx="12" cy="12" r="10"/><path d="M12 8v5"/><path d="M12 16.5h.01"/></svg>';
+
+        var lastFocusedEl = null;
+
+        function showPopup(type, title, message) {
+            if (!popup) return;
+
+            popupIcon.className = 'popup__icon popup__icon--' + type;
+            popupIcon.innerHTML = (type === 'success') ? ICON_SUCCESS : ICON_ERROR;
+            popupTitle.textContent = title;
+            popupMsg.textContent = message;
+
+            lastFocusedEl = document.activeElement;
+
+            popup.classList.add('active');
+            popup.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('popup-open');
+
+            var okBtn = popup.querySelector('.popup__btn');
+            if (okBtn) {
+                setTimeout(function () { okBtn.focus(); }, 60);
+            }
+        }
+
+        function hidePopup() {
+            if (!popup || !popup.classList.contains('active')) return;
+
+            popup.classList.remove('active');
+            popup.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('popup-open');
+
+            if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+                lastFocusedEl.focus();
+            }
+        }
+
+        if (popup) {
+            popup.querySelectorAll('[data-popup-close]').forEach(function (el) {
+                el.addEventListener('click', hidePopup);
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') hidePopup();
+            });
+        }
+
+
+        /* ------------------------------------------------------------
+           5. FIELD HELPERS  (error text + shake)
+        ------------------------------------------------------------ */
+        function errorElFor(input) {
+            return document.getElementById(input.id + 'Error');
+        }
+
+        function markInvalid(input) {
+            var errEl = errorElFor(input);
+
+            input.classList.add('input-error', 'shake');
+            setTimeout(function () {
+                input.classList.remove('shake');
+            }, 450);
+        }
+
+        function setFieldError(input, message) {
+            var errEl = errorElFor(input);
+            markInvalid(input);
+            if (errEl) {
+                errEl.textContent = message;
+                errEl.classList.add('show');
+            }
+        }
+
+        function clearFieldError(input) {
+            var errEl = errorElFor(input);
+            input.classList.remove('input-error', 'shake');
+            if (errEl) {
+                errEl.textContent = '';
+                errEl.classList.remove('show');
+            }
+        }
+
+
+        /* ------------------------------------------------------------
+           6. NEWSLETTER — Gmail-only validation + popup message
+        ------------------------------------------------------------ */
+        var newsletterForm  = document.getElementById('newsletterForm');
+        var newsletterEmail = document.getElementById('newsletterEmail');
+
+        if (newsletterForm && newsletterEmail) {
+
+            newsletterEmail.addEventListener('input', function () {
+                newsletterEmail.classList.remove('input-error', 'shake');
+            });
+
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var value = newsletterEmail.value.trim();
+
+                if (value === '') {
+                    markInvalid(newsletterEmail);
+                    showPopup(
+                        'error',
+                        'Email Required',
+                        'Please enter your email address before subscribing.'
+                    );
+                    return;
+                }
+
+                if (!GMAIL_REGEX.test(value)) {
+                    markInvalid(newsletterEmail);
+                    showPopup(
+                        'error',
+                        'Invalid Email Address',
+                        'Only Gmail addresses are accepted. Your email must end with "@gmail.com" — for example: yourname@gmail.com'
+                    );
+                    return;
+                }
+
+                newsletterEmail.classList.remove('input-error', 'shake');
+                showPopup(
+                    'success',
+                    'Subscribed Successfully!',
+                    'Thank you for subscribing with ' + value +
+                    '. You will now receive our latest updates and stories.'
+                );
+
+                newsletterForm.reset();
+            });
+        }
+
+
+        /* ------------------------------------------------------------
+           7. CONTACT FORM — strict validation + send + popup
+        ------------------------------------------------------------ */
+        var contactForm  = document.getElementById('contactForm');
+        var contactName  = document.getElementById('contactName');
+        var contactEmail = document.getElementById('contactEmail');
+        var contactPhone = document.getElementById('contactPhone');
+        var contactMsg   = document.getElementById('contactMessage');
+        var contactSend  = document.getElementById('contactSendBtn');
+
+        /* Full name: letters + single spaces only (no digits, no special chars) */
+        var NAME_REGEX  = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+        /* Phone: exactly 10 digits */
+        var PHONE_REGEX = /^[0-9]{10}$/;
+
+        if (contactForm) {
+
+            /* ---- Live input filtering -------------------------------- */
+
+            /* Name — block digits & special characters as the user types */
+            contactName.addEventListener('input', function () {
+                var cleaned = this.value
+                    .replace(/[^A-Za-z ]/g, '')   // keep letters + spaces only
+                    .replace(/ {2,}/g, ' ');      // collapse double spaces
+                if (cleaned !== this.value) this.value = cleaned;
+                clearFieldError(this);
+            });
+
+            /* Email — no spaces allowed */
+            contactEmail.addEventListener('input', function () {
+                var cleaned = this.value.replace(/\s/g, '');
+                if (cleaned !== this.value) this.value = cleaned;
+                clearFieldError(this);
+            });
+
+            /* Phone — digits only, max 10 */
+            contactPhone.addEventListener('input', function () {
+                var cleaned = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+                if (cleaned !== this.value) this.value = cleaned;
+                clearFieldError(this);
+            });
+
+            /* Message */
+            contactMsg.addEventListener('input', function () {
+                clearFieldError(this);
+            });
+
+            /* ---- Validation ----------------------------------------- */
+            function validateContactForm() {
+                var errors = [];
+                var firstInvalid = null;
+
+                function fail(input, message) {
+                    setFieldError(input, message);
+                    errors.push(message);
+                    if (!firstInvalid) firstInvalid = input;
+                }
+
+                /* 1. Full name */
+                var nameVal = contactName.value.trim();
+                if (nameVal === '') {
+                    fail(contactName, 'Full name is required.');
+                } else if (!NAME_REGEX.test(nameVal)) {
+                    fail(contactName, 'Full name can contain alphabets only (no numbers or special characters).');
+                } else {
+                    clearFieldError(contactName);
+                }
+
+                /* 2. Email — must end with @gmail.com */
+                var emailVal = contactEmail.value.trim();
+                if (emailVal === '') {
+                    fail(contactEmail, 'Email address is required.');
+                } else if (!GMAIL_REGEX.test(emailVal.toLowerCase())) {
+                    fail(contactEmail, 'Email must end with @gmail.com (example: yourname@gmail.com).');
+                } else {
+                    clearFieldError(contactEmail);
+                }
+
+                /* 3. Phone — exactly 10 digits */
+                var phoneVal = contactPhone.value.trim();
+                if (phoneVal === '') {
+                    fail(contactPhone, 'Phone number is required.');
+                } else if (!PHONE_REGEX.test(phoneVal)) {
+                    fail(contactPhone, 'Phone number must be exactly 10 digits (numbers only).');
+                } else {
+                    clearFieldError(contactPhone);
+                }
+
+                /* 4. Message */
+                var msgVal = contactMsg.value.trim();
+                if (msgVal === '') {
+                    fail(contactMsg, 'Message is required.');
+                } else {
+                    clearFieldError(contactMsg);
+                }
+
+                return { ok: errors.length === 0, errors: errors, firstInvalid: firstInvalid };
+            }
+
+            /* ---- Send ------------------------------------------------ */
+            function sendContactMessage() {
+                var btnLabel = contactSend.textContent;
+
+                contactSend.disabled = true;
+                contactSend.textContent = 'Sending...';
+
+                var payload = {
+                    name:    contactName.value.trim(),
+                    email:   contactEmail.value.trim(),
+                    phone:   contactPhone.value.trim(),
+                    message: contactMsg.value.trim()
+                };
+
+                /* ======================================================
+                   NOTE: This is a front-end demo "send".
+                   To deliver real emails, replace the setTimeout below
+                   with a request to your backend / form service, e.g.:
+
+                   fetch('https://your-server.com/api/contact', {
+                       method: 'POST',
+                       headers: { 'Content-Type': 'application/json' },
+                       body: JSON.stringify(payload)
+                   })
+                   .then(function (res) { if (!res.ok) throw new Error('Network error'); })
+                   .then(function () {  ...show success popup... })
+                   .catch(function () {  ...show error popup...  });
+                   ====================================================== */
+                window.setTimeout(function () {
+                    contactSend.disabled = false;
+                    contactSend.textContent = btnLabel;
+
+                    showPopup(
+                        'success',
+                        'Message Sent Successfully!',
+                        'Thank you, ' + payload.name + '. Your message has been sent to Stackly@gmail.com.\n' +
+                        'We will reply to ' + payload.email + ' within 24 hours.'
+                    );
+
+                    contactForm.reset();
+
+                    /* make sure no stale error states remain */
+                    [contactName, contactEmail, contactPhone, contactMsg].forEach(clearFieldError);
+                }, 1200);
+            }
+
+            /* ---- Submit ---------------------------------------------- */
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                var result = validateContactForm();
+
+                if (!result.ok) {
+                    showPopup(
+                        'error',
+                        'Please Complete The Form',
+                        result.errors.join('\n')
+                    );
+
+                    if (result.firstInvalid) result.firstInvalid.focus();
+                    return;
+                }
+
+                sendContactMessage();
+            });
+        }
+
+    })();
+    </script>
+
+</body>
+</html>
